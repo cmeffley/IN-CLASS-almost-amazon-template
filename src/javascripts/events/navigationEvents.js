@@ -1,4 +1,6 @@
+import axios from 'axios';
 import signOut from '../helpers/auth/signOut';
+import firebaseConfig from '../helpers/auth/apiKeys';
 
 // navigation events
 const navigationEvents = () => {
@@ -35,6 +37,16 @@ const navigationEvents = () => {
   // 1. When a user clicks the authors link, make a call to firebase to get all authors
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
+  const dbUrl = firebaseConfig.databaseURL;
+  document.querySelector('#authors').addEventListener('click', () => {
+    console.warn('Authors');
+  });
+    const getAuthors = () => new Promise((resolve, reject) => {
+      axios.get(`${dbUrl}/Authors.json`)
+        .then((response) => resolve(Object.value(response.data)))
+        .catch((error) => reject(error));
+    });
+    export { getAuthors };
 };
 
-export default navigationEvents;
+export { navigationEvents };
