@@ -1,6 +1,9 @@
-import axios from 'axios';
+// import axios from 'axios';
+import { getAuthors } from '../helpers/data/authorData';
 import signOut from '../helpers/auth/signOut';
-import firebaseConfig from '../helpers/auth/apiKeys';
+import { getBooks, getSaleBooks } from '../helpers/data/bookData';
+import { showBooks } from '../components/books';
+import { showAuthors } from '../components/authors';
 
 // navigation events
 const navigationEvents = () => {
@@ -10,12 +13,13 @@ const navigationEvents = () => {
 
   // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    console.warn('Sale Books');
+    getSaleBooks().then((saleBooksArray) => showBooks(saleBooksArray));
   });
 
   // ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    console.warn('All Books');
+    // GET ALL BOOKS on click
+    getBooks().then((booksArray) => showBooks(booksArray));
   });
 
   // SEARCH
@@ -37,16 +41,9 @@ const navigationEvents = () => {
   // 1. When a user clicks the authors link, make a call to firebase to get all authors
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
-  const dbUrl = firebaseConfig.databaseURL;
   document.querySelector('#authors').addEventListener('click', () => {
-    console.warn('Authors');
+    getAuthors().then((authorsArray) => showAuthors(authorsArray));
   });
-    const getAuthors = () => new Promise((resolve, reject) => {
-      axios.get(`${dbUrl}/Authors.json`)
-        .then((response) => resolve(Object.value(response.data)))
-        .catch((error) => reject(error));
-    });
-    export { getAuthors };
 };
 
-export { navigationEvents };
+export default navigationEvents;

@@ -3,9 +3,10 @@ import logoutButton from '../components/buttons/logoutButton';
 import domBuilder from '../components/domBuilder';
 import navBar from '../components/navBar';
 import domEvents from '../events/domEvents';
-import { getAuthors, navigationEvents } from '../events/navigationEvents';
-import getBooks from '../helpers/data/bookData';
+import navigationEvents from '../events/navigationEvents';
+import { getBooks } from '../helpers/data/bookData';
 import { showAuthors } from '../components/authors';
+import { getAuthors } from '../helpers/data/authorData';
 
 const startApp = () => {
   domBuilder(); // BUILD THE DOM
