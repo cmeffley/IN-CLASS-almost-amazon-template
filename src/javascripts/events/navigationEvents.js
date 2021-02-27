@@ -1,4 +1,9 @@
+// import axios from 'axios';
+import { getAuthors } from '../helpers/data/authorData';
 import signOut from '../helpers/auth/signOut';
+import { getBooks, getSaleBooks } from '../helpers/data/bookData';
+import { showBooks } from '../components/books';
+import { showAuthors } from '../components/authors';
 
 // navigation events
 const navigationEvents = () => {
@@ -8,12 +13,13 @@ const navigationEvents = () => {
 
   // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    console.warn('Sale Books');
+    getSaleBooks().then((saleBooksArray) => showBooks(saleBooksArray));
   });
 
   // ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    console.warn('All Books');
+    // GET ALL BOOKS on click
+    getBooks().then((booksArray) => showBooks(booksArray));
   });
 
   // SEARCH
@@ -35,6 +41,9 @@ const navigationEvents = () => {
   // 1. When a user clicks the authors link, make a call to firebase to get all authors
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
+  document.querySelector('#authors').addEventListener('click', () => {
+    getAuthors().then((authorsArray) => showAuthors(authorsArray));
+  });
 };
 
 export default navigationEvents;
