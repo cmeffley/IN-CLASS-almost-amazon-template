@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import { getAuthors } from '../helpers/data/authorData';
+import { getAuthors, getFavoriteAuthor } from '../helpers/data/authorData';
 import signOut from '../helpers/auth/signOut';
 import { getBooks, getSaleBooks } from '../helpers/data/bookData';
 import { showBooks } from '../components/books';
@@ -43,6 +43,13 @@ const navigationEvents = () => {
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
     getAuthors().then((authorsArray) => showAuthors(authorsArray));
+  });
+  if (document.querySelector('#authors').innerHTML === '') {
+    document.querySelector('#authors').innerHTML = 'You Have No Authors';
+  }
+
+  document.querySelector('#favorite-authors').addEventListener('click', () => {
+    getFavoriteAuthor().then((favAuthorsArray) => showAuthors(favAuthorsArray));
   });
 };
 
