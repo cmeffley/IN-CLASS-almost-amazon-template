@@ -1,27 +1,39 @@
-// import axios from 'axios';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { getAuthors, getFavoriteAuthor } from '../helpers/data/authorData';
 import signOut from '../helpers/auth/signOut';
 import { getBooks, getSaleBooks } from '../helpers/data/bookData';
-import { showBooks } from '../components/books';
-import { showAuthors } from '../components/authors';
+import { emptyBooks, showBooks } from '../components/books';
+import { emptyAuthors, showAuthors } from '../components/authors';
 
 // navigation events
-const navigationEvents = () => {
+const navigationEvents = (uid) => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
 
   // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    getSaleBooks().then((saleBooksArray) => showBooks(saleBooksArray));
+    getSaleBooks().then((saleBooksArray) => {
+      if (saleBooksArray.length) {
+        showBooks(saleBooksArray);
+      } else {
+        emptyBooks();
+      }
+    });
   });
 
   // ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
     // GET ALL BOOKS on click
-    getBooks().then((booksArray) => showBooks(booksArray));
+    getBooks(uid).then((booksArray) => {
+      if (booksArray.length) {
+        showBooks(booksArray);
+      } else {
+        emptyBooks();
+      }
+    });
   });
-
   // SEARCH
   document.querySelector('#search').addEventListener('keyup', (e) => {
     const searchValue = document.querySelector('#search').value.toLowerCase();
@@ -42,14 +54,23 @@ const navigationEvents = () => {
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
-    getAuthors().then((authorsArray) => showAuthors(authorsArray));
+    getAuthors(firebase.auth().currentUser.uid).then((authorArray) => { // same as uid passing in getBooks
+      if (authorArray.length) {
+        showAuthors(authorArray);
+      } else {
+        emptyAuthors();
+      }
+    });
   });
-  if (document.querySelector('#authors').innerHTML === '') {
-    document.querySelector('#authors').innerHTML = 'You Have No Authors';
-  }
 
   document.querySelector('#favorite-authors').addEventListener('click', () => {
-    getFavoriteAuthor().then((favAuthorsArray) => showAuthors(favAuthorsArray));
+    getFavoriteAuthor().then((favAuthorsArray) => {
+      if (favAuthorsArray.length) {
+        showAuthors(favAuthorsArray);
+      } else {
+        emptyAuthors();
+      }
+    });
   });
 };
 
