@@ -1,5 +1,3 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
 import { getAuthors, getFavoriteAuthor } from '../helpers/data/authorData';
 import signOut from '../helpers/auth/signOut';
 import { getBooks, getSaleBooks } from '../helpers/data/bookData';
@@ -54,7 +52,7 @@ const navigationEvents = (uid) => {
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
-    getAuthors(firebase.auth().currentUser.uid).then((authorArray) => { // same as uid passing in getBooks
+    getAuthors(uid).then((authorArray) => {
       if (authorArray.length) {
         showAuthors(authorArray);
       } else {
