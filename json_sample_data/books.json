@@ -46,5 +46,21 @@
     "image": "https://firebasestorage.googleapis.com/v0/b/almost-1564e.appspot.com/o/books%2Fgravy.jpg?alt=media&token=1cdec29d-f7d5-4100-bd09-684fe57235e4",
     "sale": false,
     "author_id": "-MTpcliGnhDSsyvILIoJ"
+  },
+"-MTpclg4KKMZ4FUadddEE2b": {
+  "firebaseKey": "-MTpclg4KKMZ4FUadddEE2b",
+  "price": 0.75,
+  "title": "Fifty Shades of Gravy",
+  "image": "https://firebasestorage.googleapis.com/v0/b/almost-1564e.appspot.com/o/books%2Fgravy.jpg?alt=media&token=1cdec29d-f7d5-4100-bd09-684fe57235e4",
+  "sale": false,
+  "author_id": "-MTpcliGnhDSsyvILIoJ"
+  },
+  "-MTpclg4KKMZ4FUafffEE2b": {
+    "firebaseKey": "-MTpclg4KKMZ4FUafffEE2b",
+    "price": 0.75,
+    "title": "Fifty Shades of Gravy",
+    "image": "https://firebasestorage.googleapis.com/v0/b/almost-1564e.appspot.com/o/books%2Fgravy.jpg?alt=media&token=1cdec29d-f7d5-4100-bd09-684fe57235e4",
+    "sale": false,
+    "author_id": "-MTpcliGnhDSsyvILIoJ"
   }
 }

@@ -17,9 +17,9 @@ const getAuthors = (uid) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 // DELETE AUTHOR
-const deleteAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+const deleteAuthor = (firebaseKey, uid) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/Authors/${firebaseKey}.json`) // firebaseKey is taco
-    .then(() => getAuthors().then((booksArray) => resolve(booksArray)))
+    .then(() => getAuthors(uid).then((authorsArray) => resolve(authorsArray)))
     .catch((error) => reject(error));
 });
 // CREATE AUTHOR
@@ -34,6 +34,13 @@ const createAuthor = (authorObject, uid) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+// GET SINGLE AUTHOR
+const getSingleAuthor = (authorId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/Authors/${authorId}.json`) // authorId is taco
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 // FAVORITE AUTHOR
 const getFavoriteAuthor = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/Authors.json?orderBy="favorite"&equalTo=true`)
@@ -46,5 +53,5 @@ const getFavoriteAuthor = () => new Promise((resolve, reject) => {
 // SEARCH AUTHORS
 
 export {
-  getAuthors, createAuthor, deleteAuthor, getFavoriteAuthor
+  getAuthors, createAuthor, deleteAuthor, getFavoriteAuthor, getSingleAuthor
 };
