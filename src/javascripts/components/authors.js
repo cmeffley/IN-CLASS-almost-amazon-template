@@ -5,7 +5,6 @@ const showAuthors = (array) => {
   // CREATE A BUTTON TO ADD BOOKS
   document.querySelector('#add-button').innerHTML = '<button class="btn btn-success btn-lg mb-4" id="add-author-btn">Add An Author</button>';
 
-  document.querySelector('#store').innerHTML = '';
   document.querySelector('#form-container').innerHTML = '';
 
   array.forEach((item) => {
